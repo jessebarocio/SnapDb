@@ -11,12 +11,7 @@ namespace SnapDb.Tests
     [TestFixture]
     class TestSnapRepository
     {
-        class Person
-        {
-            public Guid PersonId { get; set; }
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
-        }
+
 
         List<Person> sampleData;
         Mock<ISnapStore> snapStoreMock;

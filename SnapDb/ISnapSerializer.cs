@@ -8,5 +8,7 @@ namespace SnapDb
 {
     public interface ISnapSerializer
     {
+        string Serialize(object value);
+        T Deserialize<T>(string serializedObject);
     }
 }
