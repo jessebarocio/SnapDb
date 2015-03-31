@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SnapDb
 {
-    class JsonNetSnapSerializer : ISnapSerializer
+    internal class JsonNetSnapSerializer : ISnapSerializer
     {
         private static JsonSerializer serializer = new JsonSerializer()
         {

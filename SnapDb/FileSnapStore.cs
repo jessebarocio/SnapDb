@@ -11,7 +11,7 @@ namespace SnapDb
         private ISnapDbFile dbFile;
         private ISnapSerializer serializer;
 
-        public FileSnapStore(ISnapDbFile snapDbFile, ISnapSerializer snapSerializer)
+        internal FileSnapStore(ISnapDbFile snapDbFile, ISnapSerializer snapSerializer)
         {
             this.dbFile = snapDbFile;
             this.serializer = snapSerializer;

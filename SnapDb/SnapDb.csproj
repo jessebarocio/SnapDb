@@ -49,6 +49,7 @@
     <Compile Include="ISnapStore.cs" />
     <Compile Include="JsonNetSnapSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SnapDbFile.cs" />
     <Compile Include="SnapRepository.cs" />
   </ItemGroup>
   <ItemGroup>
