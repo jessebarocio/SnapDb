@@ -15,6 +15,7 @@ namespace SnapDb
             TypeNameHandling = TypeNameHandling.Objects
         };
 
+
         public void Serialize(object value, Stream output)
         {
             using (var writer = new StreamWriter(output))

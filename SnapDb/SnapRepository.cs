@@ -12,10 +12,8 @@ namespace SnapDb
         private ISnapStore snapStore;
 
 
-        public SnapRepository()
-        {
-
-        }
+        public SnapRepository(string path)
+            : this(new FileSnapStore(path)) { }
 
         internal SnapRepository(ISnapStore snapStore)
         {
@@ -36,7 +34,7 @@ namespace SnapDb
         public IQueryable<T> Get(Expression<Func<T, bool>> filter = null)
         {
             var results = Records.AsQueryable();
-            if(filter != null)
+            if (filter != null)
             {
                 results = results.Where(filter);
             }

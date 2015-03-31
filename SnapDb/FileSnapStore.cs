@@ -11,11 +11,16 @@ namespace SnapDb
         private ISnapDbFile dbFile;
         private ISnapSerializer serializer;
 
+
+        public FileSnapStore(string path)
+            : this(new SnapDbFile(path), new JsonNetSnapSerializer()) { }
+
         internal FileSnapStore(ISnapDbFile snapDbFile, ISnapSerializer snapSerializer)
         {
             this.dbFile = snapDbFile;
             this.serializer = snapSerializer;
         }
+
 
         public IEnumerable<T> LoadRecords<T>()
         {

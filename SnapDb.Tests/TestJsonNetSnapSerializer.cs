@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SnapDb.Tests
 {
-    [TestFixture]
+    [TestFixture(Category = "Unit")]
     [UseReporter(typeof(DiffReporter))]
     class TestJsonNetSnapSerializer
     {

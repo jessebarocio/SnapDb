@@ -11,10 +11,12 @@ namespace SnapDb
     {
         string dbFilePath;
 
+
         public SnapDbFile(string path)
         {
             this.dbFilePath = path;
         }
+
 
         public Stream OpenRead()
         {

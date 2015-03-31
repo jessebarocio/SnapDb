@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SnapDb.Tests
 {
-    [TestFixture]
+    [TestFixture(Category = "Unit")]
     class TestSnapRepository
     {
 

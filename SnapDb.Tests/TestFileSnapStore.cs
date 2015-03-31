@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SnapDb.Tests
 {
-    [TestFixture]
+    [TestFixture(Category = "Unit")]
     class TestFileSnapStore
     {
         Mock<ISnapDbFile> dbFileMock;
