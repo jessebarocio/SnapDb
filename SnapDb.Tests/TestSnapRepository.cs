@@ -51,13 +51,25 @@ namespace SnapDb.Tests
         [Test]
         public void Records_LoadFromSnapStore()
         {
-            Assert.AreSame(sampleData, repository.Records);
+            var result = repository.Records;
+
+            Assert.AreEqual(sampleData.Count, result.Count());
+            foreach (var item in result)
+            {
+                Assert.True(sampleData.Contains(item));
+            }
         }
 
         [Test]
         public void Get_ReturnsAllRecordsIfNoFilterIsPassed()
         {
-            Assert.AreEqual(sampleData.Count, repository.Get().Count());
+            var result = repository.Get();
+
+            Assert.AreEqual(sampleData.Count, result.Count());
+            foreach (var item in result)
+            {
+                Assert.True(sampleData.Contains(item));
+            }
         }
 
         [Test]

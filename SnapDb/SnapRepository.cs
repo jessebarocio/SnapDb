@@ -23,12 +23,12 @@ namespace SnapDb
         }
 
 
-        private IEnumerable<T> records;
-        internal IEnumerable<T> Records
+        private List<T> records;
+        internal List<T> Records
         {
             get
             {
-                return records ?? (records = snapStore.LoadRecords<T>());
+                return records ?? (records = snapStore.LoadRecords<T>().ToList());
             }
         }
 
