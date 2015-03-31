@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileSnapStore.cs" />
+    <Compile Include="ISnapDbFile.cs" />
     <Compile Include="ISnapSerializer.cs" />
     <Compile Include="ISnapStore.cs" />
     <Compile Include="JsonNetSnapSerializer.cs" />
