@@ -12,6 +12,13 @@ namespace SnapDb.Tests
     class TestSnapDbFile
     {
         string dbFilePath = @"..\..\..\TestData\SampleDb.json";
+        string newDbFilePath = @"..\..\..\TestData\NewSampleDb.json";
+
+        [TearDown]
+        public void TearDown()
+        {
+            File.Delete(newDbFilePath);
+        }
 
         [Test]
         public void OpenRead_ReturnsFileStream()
@@ -23,6 +30,17 @@ namespace SnapDb.Tests
                 var fileStream = (FileStream)stream;
                 Assert.True(fileStream.CanRead);
                 Assert.False(fileStream.CanWrite);
+            }
+        }
+
+        [Test]
+        public void OpenRead_CreatesFileIfDoesntExist()
+        {
+            var dbFile = new SnapDbFile(newDbFilePath);
+            Assert.False(File.Exists(newDbFilePath));
+            using (var stream = dbFile.OpenRead())
+            {
+                Assert.True(File.Exists(newDbFilePath));
             }
         }
 

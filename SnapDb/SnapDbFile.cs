@@ -20,7 +20,7 @@ namespace SnapDb
 
         public Stream OpenRead()
         {
-            return File.OpenRead(dbFilePath);
+            return File.Open(dbFilePath, FileMode.OpenOrCreate, FileAccess.Read);
         }
 
         public Stream OpenWrite()
