@@ -51,7 +51,24 @@ namespace SnapDb.Tests.Unit
         }
 
         [Test]
-        public void LoadRecords_OpensAndSerializesToFile()
+        public void LoadRecords_ReturnsEmptyIEnumerableIfDeserializerReturnsNull()
+        {
+            using (var stream = new MemoryStream())
+            {
+                dbFileMock.Setup(s => s.OpenWrite()).Returns(stream);
+                serializerMock.Setup( s => s.Deserialize<IEnumerable<Person>>( It.IsAny<Stream>() ) )
+                        .Returns( () => { return null; } );
+
+                var result = fileStore.LoadRecords<Person>();
+                Assert.IsNotNull(result);
+                Assert.IsInstanceOf<IEnumerable<Person>>(result);
+            }
+
+
+        }
+
+        [Test]
+        public void SaveRecords_OpensAndSerializesToFile()
         {
             using (var stream = new MemoryStream())
             {

@@ -26,7 +26,8 @@ namespace SnapDb
         {
             using (var stream = dbFile.OpenRead())
             {
-                return serializer.Deserialize<IEnumerable<T>>(stream);
+                var result = serializer.Deserialize<IEnumerable<T>>(stream);
+                return result ?? new List<T>();
             }
         }
 
