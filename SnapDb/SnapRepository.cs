@@ -9,12 +9,31 @@ namespace SnapDb
 {
     public class SnapRepository<T>
     {
-        public IQueryable<T> Get(Expression<Func<T, bool>> filter = null)
+        private ISnapStore snapStore;
+
+
+        public SnapRepository()
         {
-            throw new NotImplementedException();
+
         }
 
-        public T Get(string id)
+        internal SnapRepository(ISnapStore snapStore)
+        {
+            this.snapStore = snapStore;
+        }
+
+
+        private IEnumerable<T> records;
+        internal IEnumerable<T> Records
+        {
+            get
+            {
+                return records ?? (records = snapStore.LoadRecords<T>());
+            }
+        }
+
+
+        public IQueryable<T> Get(Expression<Func<T, bool>> filter = null)
         {
             throw new NotImplementedException();
         }
@@ -24,12 +43,12 @@ namespace SnapDb
             throw new NotImplementedException();
         }
 
-        public void Update(T item)
+        public void Delete(T item)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(string id)
+        public void SaveChanges()
         {
             throw new NotImplementedException();
         }

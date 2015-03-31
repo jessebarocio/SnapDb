@@ -8,5 +8,6 @@ namespace SnapDb
 {
     public interface ISnapStore
     {
+        IEnumerable<T> LoadRecords<T>();
     }
 }
