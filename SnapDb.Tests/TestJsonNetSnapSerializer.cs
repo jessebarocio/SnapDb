@@ -33,5 +33,20 @@ namespace SnapDb.Tests
                 Approvals.Verify(result);
             }
         }
+
+        [Test]
+        public void Deserialize_DeserializesObjectCorrectly()
+        {
+            string json = "{\"$type\":\"SnapDb.Tests.Person, SnapDb.Tests\",\"PersonId\":\"e71f68e0-34b4-4fa4-b375-26923af4e40d\",\"FirstName\":\"John\",\"LastName\":\"Doe\"}";
+            var serializer = new JsonNetSnapSerializer();
+            using (var stream = new MemoryStream(Encoding.Default.GetBytes(json)))
+            {
+                var result = serializer.Deserialize<Person>(stream);
+
+                Assert.AreEqual("e71f68e0-34b4-4fa4-b375-26923af4e40d", result.PersonId.ToString());
+                Assert.AreEqual("John", result.FirstName);
+                Assert.AreEqual("Doe", result.LastName);
+            }
+        }
     }
 }

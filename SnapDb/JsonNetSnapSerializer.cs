@@ -26,7 +26,11 @@ namespace SnapDb
 
         public T Deserialize<T>(Stream input)
         {
-            throw new NotImplementedException();
+            using (var reader = new StreamReader(input))
+            using (var jsonReader = new JsonTextReader(reader))
+            {
+                return serializer.Deserialize<T>(jsonReader);
+            }
         }
     }
 }
