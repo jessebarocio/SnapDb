@@ -55,7 +55,7 @@ namespace SnapDb
 
         public void SaveChanges()
         {
-            throw new NotImplementedException();
+            snapStore.SaveRecords<T>(Records);
         }
     }
 }

@@ -106,5 +106,23 @@ namespace SnapDb.Tests
 
             Assert.False(repository.Records.Contains(itemToRemove));
         }
+
+        [Test]
+        public void SaveChanges_SavesAllRecordsToSnapStore()
+        {
+            bool saveCalled = false;
+            IEnumerable<Person> recordsToSave = null;
+            snapStoreMock.Setup(s => s.SaveRecords<Person>(It.IsAny<IEnumerable<Person>>()))
+                .Callback<IEnumerable<Person>>((people) =>
+                {
+                    saveCalled = true;
+                    recordsToSave = people;
+                });
+
+            repository.SaveChanges();
+
+            Assert.True(saveCalled);
+            Assert.AreSame(repository.Records, recordsToSave);
+        }
     }
 }

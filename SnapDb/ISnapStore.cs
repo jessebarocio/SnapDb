@@ -9,5 +9,6 @@ namespace SnapDb
     public interface ISnapStore
     {
         IEnumerable<T> LoadRecords<T>();
+        void SaveRecords<T>(IEnumerable<T> records);
     }
 }
