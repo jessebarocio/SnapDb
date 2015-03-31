@@ -54,12 +54,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Integration\TestSnapDbRepository.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestFileSnapStore.cs" />
-    <Compile Include="TestJsonNetSnapSerializer.cs" />
-    <Compile Include="TestSnapDbFile.cs" />
-    <Compile Include="TestSnapRepository.cs" />
+    <Compile Include="Unit\TestFileSnapStore.cs" />
+    <Compile Include="Unit\TestJsonNetSnapSerializer.cs" />
+    <Compile Include="Integration\TestSnapDbFile.cs" />
+    <Compile Include="Unit\TestSnapRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

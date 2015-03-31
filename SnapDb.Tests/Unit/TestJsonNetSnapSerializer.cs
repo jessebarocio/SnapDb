@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SnapDb.Tests
+namespace SnapDb.Tests.Unit
 {
     [TestFixture(Category = "Unit")]
     [UseReporter(typeof(DiffReporter))]
