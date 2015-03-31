@@ -80,5 +80,31 @@ namespace SnapDb.Tests
             Assert.AreEqual(1, result.Count());
             Assert.AreEqual(sampleData.First().PersonId, result.First().PersonId);
         }
+
+        [Test]
+        public void Insert_AddsItemToRecords()
+        {
+            var newPerson = new Person()
+            {
+                PersonId = Guid.NewGuid(),
+                FirstName = "John",
+                LastName = "Doe"
+            };
+
+            repository.Insert(newPerson);
+
+            Assert.Contains(newPerson, repository.Records);
+        }
+
+        [Test]
+        public void Delete_RemovesItemFromRecords()
+        {
+            var itemToRemove = sampleData.First();
+            Assert.True(repository.Records.Contains(itemToRemove));
+
+            repository.Delete(itemToRemove);
+
+            Assert.False(repository.Records.Contains(itemToRemove));
+        }
     }
 }

@@ -45,12 +45,12 @@ namespace SnapDb
 
         public void Insert(T item)
         {
-            throw new NotImplementedException();
+            Records.Add(item);
         }
 
         public void Delete(T item)
         {
-            throw new NotImplementedException();
+            Records.Remove(item);
         }
 
         public void SaveChanges()
