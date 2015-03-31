@@ -35,7 +35,12 @@ namespace SnapDb
 
         public IQueryable<T> Get(Expression<Func<T, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            var results = Records.AsQueryable();
+            if(filter != null)
+            {
+                results = results.Where(filter);
+            }
+            return results;
         }
 
         public void Insert(T item)

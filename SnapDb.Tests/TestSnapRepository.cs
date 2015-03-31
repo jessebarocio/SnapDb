@@ -18,16 +18,55 @@ namespace SnapDb.Tests
             public string LastName { get; set; }
         }
 
+        List<Person> sampleData;
+        Mock<ISnapStore> snapStoreMock;
+        SnapRepository<Person> repository;
+
+        [SetUp]
+        public void SetUp()
+        {
+            sampleData = new List<Person>()
+            {
+                new Person()
+                {
+                    PersonId = Guid.NewGuid(),
+                    FirstName = "John",
+                    LastName = "Doe"
+                },
+                new Person()
+                {
+                    PersonId = Guid.NewGuid(),
+                    FirstName = "Jane",
+                    LastName = "Doe"
+                },
+            };
+
+            // Mock ISnapStore
+            snapStoreMock = new Mock<ISnapStore>();
+            snapStoreMock.Setup(s => s.LoadRecords<Person>()).Returns(sampleData);
+
+            repository = new SnapRepository<Person>(snapStoreMock.Object);
+        }
+
         [Test]
         public void Records_LoadFromSnapStore()
         {
-            var people = new List<Person>();
-            var snapStoreMock = new Mock<ISnapStore>();
-            snapStoreMock.Setup(s => s.LoadRecords<Person>()).Returns(people);
+            Assert.AreSame(sampleData, repository.Records);
+        }
 
-            var repo = new SnapRepository<Person>(snapStoreMock.Object);
+        [Test]
+        public void Get_ReturnsAllRecordsIfNoFilterIsPassed()
+        {
+            Assert.AreEqual(sampleData.Count, repository.Get().Count());
+        }
 
-            Assert.AreSame(people, repo.Records);
+        [Test]
+        public void Get_ReturnsFilteredRecords()
+        {
+            var result = repository.Get(p => p.FirstName == "John");
+
+            Assert.AreEqual(1, result.Count());
+            Assert.AreEqual(sampleData.First().PersonId, result.First().PersonId);
         }
     }
 }
