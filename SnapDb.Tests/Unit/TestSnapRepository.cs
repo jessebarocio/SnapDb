@@ -12,7 +12,7 @@ namespace SnapDb.Tests.Unit
     class TestSnapRepository
     {
         List<Person> sampleData;
-        Mock<ISnapStore> snapStoreMock;
+        Mock<ISnapStore<Person>> snapStoreMock;
         SnapRepository<Person> repository;
 
         [SetUp]
@@ -35,8 +35,8 @@ namespace SnapDb.Tests.Unit
             };
 
             // Mock ISnapStore
-            snapStoreMock = new Mock<ISnapStore>();
-            snapStoreMock.Setup(s => s.LoadRecords<Person>()).Returns(sampleData);
+            snapStoreMock = new Mock<ISnapStore<Person>>();
+            snapStoreMock.Setup(s => s.LoadRecords()).Returns(sampleData);
 
             repository = new SnapRepository<Person>(snapStoreMock.Object);
         }
@@ -105,7 +105,7 @@ namespace SnapDb.Tests.Unit
         {
             bool saveCalled = false;
             IEnumerable<Person> recordsToSave = null;
-            snapStoreMock.Setup(s => s.SaveRecords<Person>(It.IsAny<IEnumerable<Person>>()))
+            snapStoreMock.Setup(s => s.SaveRecords(It.IsAny<IEnumerable<Person>>()))
                 .Callback<IEnumerable<Person>>((people) =>
                 {
                     saveCalled = true;

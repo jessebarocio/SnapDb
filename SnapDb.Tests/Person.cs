@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SnapDb.Tests
 {
-    class Person
+    public class Person
     {
         public Guid PersonId { get; set; }
         public string FirstName { get; set; }

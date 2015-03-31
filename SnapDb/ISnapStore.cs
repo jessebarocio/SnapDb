@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace SnapDb
 {
-    public interface ISnapStore
+    /// <summary>
+    /// An interface for loading and saving SnapDb records. Implement this interface to create custom SnapStore types that a
+    /// SnapRepository can work with.
+    /// </summary>
+    /// <typeparam name="T">Any type</typeparam>
+    public interface ISnapStore<T>
     {
-        IEnumerable<T> LoadRecords<T>();
-        void SaveRecords<T>(IEnumerable<T> records);
+        IEnumerable<T> LoadRecords();
+        void SaveRecords(IEnumerable<T> records);
     }
 }

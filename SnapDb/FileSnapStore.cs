@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SnapDb
 {
-    class FileSnapStore : ISnapStore
+    class FileSnapStore<T> : ISnapStore<T>
     {
         private ISnapDbFile dbFile;
         private ISnapSerializer serializer;
@@ -22,7 +22,7 @@ namespace SnapDb
         }
 
 
-        public IEnumerable<T> LoadRecords<T>()
+        public IEnumerable<T> LoadRecords()
         {
             using (var stream = dbFile.OpenRead())
             {
@@ -31,7 +31,7 @@ namespace SnapDb
             }
         }
 
-        public void SaveRecords<T>(IEnumerable<T> records)
+        public void SaveRecords(IEnumerable<T> records)
         {
             using (var stream = dbFile.OpenWrite())
             {

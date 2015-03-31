@@ -9,7 +9,7 @@ namespace SnapDb
 {
     public class SnapRepository<T>
     {
-        private ISnapStore snapStore;
+        private ISnapStore<T> snapStore;
 
 
         /// <summary>
@@ -17,13 +17,13 @@ namespace SnapDb
         /// </summary>
         /// <param name="path">The path to the SnapDb file.</param>
         public SnapRepository(string path)
-            : this(new FileSnapStore(path)) { }
+            : this(new FileSnapStore<T>(path)) { }
 
         /// <summary>
         /// Creates a new SnapRepository using the given ISnapStore.
         /// </summary>
         /// <param name="snapStore">The ISnapStore used to load/save records.</param>
-        internal SnapRepository(ISnapStore snapStore)
+        public SnapRepository(ISnapStore<T> snapStore)
         {
             this.snapStore = snapStore;
         }
@@ -37,7 +37,7 @@ namespace SnapDb
         {
             get
             {
-                return records ?? (records = snapStore.LoadRecords<T>().ToList());
+                return records ?? (records = snapStore.LoadRecords().ToList());
             }
         }
 
@@ -82,7 +82,7 @@ namespace SnapDb
         /// </summary>
         public void SaveChanges()
         {
-            snapStore.SaveRecords<T>(Records);
+            snapStore.SaveRecords(Records);
         }
     }
 }

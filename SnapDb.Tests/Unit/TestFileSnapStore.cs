@@ -14,7 +14,7 @@ namespace SnapDb.Tests.Unit
     {
         Mock<ISnapDbFile> dbFileMock;
         Mock<ISnapSerializer> serializerMock;
-        FileSnapStore fileStore;
+        FileSnapStore<Person> fileStore;
 
         [SetUp]
         public void SetUp()
@@ -22,7 +22,7 @@ namespace SnapDb.Tests.Unit
             dbFileMock = new Mock<ISnapDbFile>();
             serializerMock = new Mock<ISnapSerializer>();
 
-            fileStore = new FileSnapStore(dbFileMock.Object, serializerMock.Object);
+            fileStore = new FileSnapStore<Person>(dbFileMock.Object, serializerMock.Object);
         }
 
         [Test]
@@ -43,7 +43,7 @@ namespace SnapDb.Tests.Unit
                         streamPassedToDeserializer = inputStream;
                     });
 
-                var result = fileStore.LoadRecords<Person>();
+                var result = fileStore.LoadRecords();
 
                 Assert.True(openReadWasCalled);
                 Assert.AreSame(stream, streamPassedToDeserializer);
@@ -59,7 +59,7 @@ namespace SnapDb.Tests.Unit
                 serializerMock.Setup( s => s.Deserialize<IEnumerable<Person>>( It.IsAny<Stream>() ) )
                         .Returns( () => { return null; } );
 
-                var result = fileStore.LoadRecords<Person>();
+                var result = fileStore.LoadRecords();
                 Assert.IsNotNull(result);
                 Assert.IsInstanceOf<IEnumerable<Person>>(result);
             }
