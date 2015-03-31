@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,12 +15,16 @@ namespace SnapDb
             TypeNameHandling = TypeNameHandling.Objects
         };
 
-        public string Serialize(object value)
+        public void Serialize(object value, Stream output)
         {
-            throw new NotImplementedException();
+            using (var writer = new StreamWriter(output))
+            using (var jsonWriter = new JsonTextWriter(writer))
+            {
+                serializer.Serialize(jsonWriter, value);
+            }
         }
 
-        public T Deserialize<T>(string serializedObject)
+        public T Deserialize<T>(Stream input)
         {
             throw new NotImplementedException();
         }
