@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace SnapDb
 {
+    /// <summary>
+    /// An implementation of ISnapStore that serializes records and saves them to a file.
+    /// </summary>
+    /// <typeparam name="T">The record type.</typeparam>
     public class FileSnapStore<T> : ISnapStore<T>
     {
         private ISnapDbFile dbFile;

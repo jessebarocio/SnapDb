@@ -13,7 +13,16 @@ namespace SnapDb
     /// <typeparam name="T">Any type</typeparam>
     public interface ISnapStore<T>
     {
+        /// <summary>
+        /// Loads all records from the store.
+        /// </summary>
+        /// <returns>An IEnumerable containing all records.</returns>
         IEnumerable<T> LoadRecords();
+
+        /// <summary>
+        /// Saves all records to the store.
+        /// </summary>
+        /// <param name="records">An IEnumerable containing all of the records to save.s</param>
         void SaveRecords(IEnumerable<T> records);
     }
 }

@@ -25,11 +25,19 @@ namespace SnapDb
         }
 
 
+        /// <summary>
+        /// Opens the file for reading.
+        /// </summary>
+        /// <returns>An open FileStream.</returns>
         public Stream OpenRead()
         {
             return File.Open(dbFilePath, FileMode.OpenOrCreate, FileAccess.Read);
         }
 
+        /// <summary>
+        /// Opens the file for writing.
+        /// </summary>
+        /// <returns>An open FileStream.</returns>
         public Stream OpenWrite()
         {
             return File.Open(dbFilePath, FileMode.Create);
