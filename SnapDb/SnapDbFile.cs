@@ -7,11 +7,18 @@ using System.Threading.Tasks;
 
 namespace SnapDb
 {
-    internal class SnapDbFile : ISnapDbFile
+    /// <summary>
+    /// A file system implementation of ISnapDbFile.
+    /// </summary>
+    public class SnapDbFile : ISnapDbFile
     {
         string dbFilePath;
 
 
+        /// <summary>
+        /// Creates a new SnapDbFile at the given path.
+        /// </summary>
+        /// <param name="path"></param>
         public SnapDbFile(string path)
         {
             this.dbFilePath = path;

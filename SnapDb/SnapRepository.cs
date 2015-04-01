@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace SnapDb
 {
+    /// <summary>
+    /// A simple generic repository for performing CRUD operations on a SnapDb.
+    /// </summary>
+    /// <typeparam name="T">The desired type.</typeparam>
     public class SnapRepository<T>
     {
         private ISnapStore<T> snapStore;

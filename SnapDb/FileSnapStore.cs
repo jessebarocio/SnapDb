@@ -6,22 +6,35 @@ using System.Threading.Tasks;
 
 namespace SnapDb
 {
-    class FileSnapStore<T> : ISnapStore<T>
+    public class FileSnapStore<T> : ISnapStore<T>
     {
         private ISnapDbFile dbFile;
         private ISnapSerializer serializer;
 
 
+        /// <summary>
+        /// Initializes a new FileSnapStore using a Json serializer at the given path.
+        /// </summary>
+        /// <param name="path">The path for the database file.</param>
         public FileSnapStore(string path)
             : this(new SnapDbFile(path), new JsonNetSnapSerializer()) { }
 
-        internal FileSnapStore(ISnapDbFile snapDbFile, ISnapSerializer snapSerializer)
+        /// <summary>
+        /// Initializes a new FileSnapStore using the given SnapDbFile and SnapSerializer.
+        /// </summary>
+        /// <param name="snapDbFile">An implementation of ISnapDbFile used to read/write records.</param>
+        /// <param name="snapSerializer">An implementation of ISnapSerializer used to serialize the records.</param>
+        public FileSnapStore(ISnapDbFile snapDbFile, ISnapSerializer snapSerializer)
         {
             this.dbFile = snapDbFile;
             this.serializer = snapSerializer;
         }
 
 
+        /// <summary>
+        /// Loads and deserializes the records from the SnapDbFile.
+        /// </summary>
+        /// <returns>An IEnumerable of type <typeparamref name="T"/> containing all of the records.</returns>
         public IEnumerable<T> LoadRecords()
         {
             using (var stream = dbFile.OpenRead())
@@ -31,6 +44,10 @@ namespace SnapDb
             }
         }
 
+        /// <summary>
+        /// Serializes and saves the records to the SnapDbFile.
+        /// </summary>
+        /// <param name="records">An IEnumerable of type <typeparamref name="T"/> to serialize/write to the SnapDbFile.</param>
         public void SaveRecords(IEnumerable<T> records)
         {
             using (var stream = dbFile.OpenWrite())
